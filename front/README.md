@@ -1,15 +1,31 @@
-# React + Vite
+# React + Vite (VSCode)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React Vite형식으로 프로젝트를 제작.
 
-Currently, two official plugins are available:
+```bash
+cd front
+npm create vite@latest
+npm run dev
+```
+- vite 설치할 때
+    - Select a framework : React
+    - Select a variant : JavaScript
+    - Use Vite 8 beta : No
+    - Install ~~~ start now ? : Yes
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## tailwindcss
 
-## React Compiler
+Tailwind CSS 프레임워크를 사용하고 있음.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+(front/ 에서 설치 진행)
+```bash
+npm install -D tailwindcss@3.4.17 postcss autoprefixer
+npx tailwindcss init -p
+npm run dev
+```
+-[x]postcss.config.js 파일 생성 확인.
+-[x]tailwind.config.js 파일 생성 확인.
+
 
 ## Expanding the ESLint configuration
 
