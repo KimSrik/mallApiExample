@@ -23,10 +23,39 @@ npm install -D tailwindcss@3.4.17 postcss autoprefixer
 npx tailwindcss init -p
 npm run dev
 ```
-- [X]postcss.config.js 파일 생성 확인.
-- [X]tailwind.config.js 파일 생성 확인.
+    - postcss.config.js 파일 생성 확인.
+    - tailwind.config.js 파일 생성 확인.
+
+파일이 생성되었다면, 설치 완료.
 
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## tailwindcss 기본 설정
+- tailwind.cofnig.js 수정
+```
+content: [
+  "./src/**/*.{js,jsx,ts,tsx}",
+]
+```
+
+- src/index.css 수정
+```
+기존 코드를 다 지우고
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+- src/App.jsx 수정
+```
+function App() {
+  return (
+    <>
+      <h1 className="text-3xl font-bold underline">Hello React!!!</h1>
+    </>
+  );
+}
+```
+
+
+기본 설정 완료.
