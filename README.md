@@ -18,10 +18,10 @@ npm create vite@latest
 npm run dev
 ```
 - vite 설치할 때
-Select a framework : React
-Select a variant : JavaScript
-Use Vite 8 beta : No
-Install ~~~ start now ? : Yes
+    - Select a framework : React
+    - Select a variant : JavaScript
+    - Use Vite 8 beta : No
+    - Install ~~~ start now ? : Yes
 
 
 
