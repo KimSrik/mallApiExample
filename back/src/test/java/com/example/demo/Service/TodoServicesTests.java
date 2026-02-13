@@ -18,6 +18,8 @@ public class TodoServicesTests {
 	@Autowired
 	private TodoService todoService;
 	
+	/*
+	// 글 쓰기 단위 테스트
 	@Test
 	public void testRegister() {
 		TodoDTO todoDTO = TodoDTO.builder()
@@ -30,4 +32,16 @@ public class TodoServicesTests {
 		
 		log.info("tno : " + tno);
 	}
+	*/
+	@Test
+	public void testGet() {
+		Long tno = 101L;
+		
+		TodoDTO todoDTO = todoService.get(tno);
+		
+		log.info(todoDTO);
+	}
+	
+	
+	
 }
