@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,5 +33,19 @@ public class TodoServiceImpl implements TodoService {
 		Todo savedTodo = todoRepository.save(todo);
 		
 		return savedTodo.getTno();
+	}
+	
+	public TodoDTO get(Long tno) {
+		
+		Optional<Todo> result = todoRepository.findById(tno);
+		
+		Todo todo = result.orElseThrow();
+		
+		TodoDTO dto = modelMapper.map(todo, TodoDTO.class);
+		// get메소드가 상세보기이기 때문에 글을 읽기 위해서 DB에서 데이터를 Entity형태로
+		// 받아오게 되고, DTO로 변환한 후에 front로 넘겨줘야 한다.
+		
+		return dto;
+		
 	}
 }
