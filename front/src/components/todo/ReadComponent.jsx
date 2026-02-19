@@ -23,10 +23,25 @@ const ReadComponent = ( {tno} ) => {
   // 데이터 변화에 취약하기 때문에 비동기 통신을 씀.
 
   return (
-    <div>
-
+    <div className="border-2 border-sky-200 mt-10 m-2 p-4">
+      {makeDiv('tno', todo.tno)}
+      {makeDiv('writer', todo.writer)}
+      {makeDiv('title', todo.title)}
+      {makeDiv('Due date', todo.dueDate)}
+      {makeDiv('Complete', todo.complete ? 'Complete' : 'Not Yet')}
     </div>
   )
 }
+
+const makeDiv = (title, value) => 
+  <div className="flex justify-center">
+    <div className="relative mb-4 flex w-full flex-wrap items-stretch">
+      <div className="w-1/5 p-6 text-right font-bold">{title}</div>
+      <div className="w-4/5 p-6 rounded-r border border-solid shadow-md">{value}</div>
+    </div>
+  </div>
+
+
+
 
 export default ReadComponent;

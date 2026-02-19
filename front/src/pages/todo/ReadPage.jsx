@@ -32,7 +32,7 @@ const ReadPage = () => {
   
 
   return (
-    <div className="font-extrabold w-full bg-white mt-6">
+    <div className="font-extrabold w-full bg-white mt-6 pb-1">
       <div className="text-2xl">
         Todo Read Page Component {tno}
       </div>
