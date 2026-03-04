@@ -32,6 +32,7 @@ public class ProductServiceTests {
 	}
 	*/
 	
+	/*
 	@Test
 	public void testRegister() {
 		
@@ -47,6 +48,17 @@ public class ProductServiceTests {
 		
 		productService.register(productDTO);
 		
+	}
+	*/
+	
+	@Test
+	public void testRead() {
+		Long pno = 11L;
+		
+		ProductDTO productDTO = productService.get(pno);
+		
+		log.info("목록 : " + productDTO);
+		log.info(productDTO.getUploadFileNames());
 	}
 	
 	
