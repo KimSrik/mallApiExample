@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.dto.PageRequestDTO;
+import com.example.demo.dto.PageResponseDTO;
 import com.example.demo.dto.ProductDTO;
+import com.example.demo.service.ProductService;
 import com.example.demo.util.CustomFileUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -26,8 +29,10 @@ public class ProductController {
 
 	private final CustomFileUtil fileUtil;
 	
+	private final ProductService productService;
+	
 	@PostMapping("/")
-	public Map<String, String> register(ProductDTO productDTO){
+	public Map<String, Long> register(ProductDTO productDTO){
 		
 		log.info("register : " + productDTO);
 		
@@ -39,13 +44,22 @@ public class ProductController {
 		
 		log.info("업로드된 파일 이름 : " + uploadFileNames);
 		
-		return Map.of("RESULT", "SUCCESS");
+		Long pno = productService.register(productDTO);
+		
+		return Map.of("RESULT", pno);
 	}
 	
 	@GetMapping("/view/{fileName}")
 	public ResponseEntity<Resource> viewFileGET(@PathVariable(name = "fileName") String fileName){
 		
 		return fileUtil.getFile(fileName);
+	}
+	
+	@GetMapping("/list")
+	public PageResponseDTO<ProductDTO> list(PageRequestDTO pageRequestDTO) {
+		log.info("list ---------------------");
+		
+		return productService.getList(pageRequestDTO);
 	}
 	
 }
