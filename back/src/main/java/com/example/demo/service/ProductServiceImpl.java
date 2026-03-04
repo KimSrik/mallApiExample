@@ -119,6 +119,10 @@ public class ProductServiceImpl implements ProductService {
 		}
 		
 		List<String> fileNameList = imageList.stream().map(productImage -> productImage.getFileName()).toList();
+		
+		productDTO.setUploadFileNames(fileNameList);
+		
+		return productDTO;
 	}
 	
 	
