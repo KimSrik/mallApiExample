@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	public PageResponseDTO<ProductDTO> getList(PageRequestDTO pageRequestDTO) {
 		
-		log.info("getList------------------------------");
+		log.info("getList ------------------------------");
 		
 		Pageable pageable = PageRequest.of(pageRequestDTO.getPage() - 1, pageRequestDTO.getSize(), Sort.by("pno").descending());
 		
@@ -61,6 +62,63 @@ public class ProductServiceImpl implements ProductService {
 		
 		return responseDTO;
 		
+	}
+	
+	public Long register(ProductDTO productDTO) {
+		Product product = dtoToEntity(productDTO);
+		
+		Product result = productRepository.save(product);
+		
+		return result.getPno();
+		
+	}
+	
+	private Product dtoToEntity(ProductDTO productDTO) {
+		Product product = Product.builder()
+				.pno(productDTO.getPno())
+				.pname(productDTO.getPname())
+				.pdesc(productDTO.getPdesc())
+				.price(productDTO.getPrice())
+				.build();
+		
+		List<String> uploadFileNames = productDTO.getUploadFileNames();
+		
+		if(uploadFileNames == null) {
+			return product;
+		}
+		
+		uploadFileNames.stream().forEach(uploadName -> {
+			product.addImageString(uploadName);
+		});
+		
+		return product;
+	}
+	
+	public ProductDTO get(Long pno) {
+		Optional<Product> result = productRepository.selectOne(pno);
+		
+		Product product = result.orElseThrow();
+		
+		ProductDTO productDTO = entityToDTO(product);
+		
+		return productDTO;
+	}
+	
+	private ProductDTO entityToDTO(Product product) {
+		ProductDTO productDTO = ProductDTO.builder()
+				.pno(product.getPno())
+				.pname(product.getPname())
+				.pdesc(product.getPdesc())
+				.price(product.getPrice())
+				.build();
+		
+		List<ProductImage> imageList = product.getImageList();
+		
+		if(imageList == null || imageList.size() == 0) {
+			return productDTO;
+		}
+		
+		List<String> fileNameList = imageList.stream().map(productImage -> productImage.getFileName()).toList();
 	}
 	
 	
