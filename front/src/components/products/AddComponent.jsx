@@ -20,7 +20,20 @@ const AddComponent = () => {
   }
 
   const handleClickAdd = (e) => {
-    console.log(product);
+
+    const files = uploadRef.current.files;
+
+    const formData = new FormData();
+
+    for(let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+
+    formData.append("pname", product.pname);
+    formData.append("pdesc", product.pdesc);
+    formData.append("price", product.price);
+
+    console.log(formData);
   }
 
   return(
@@ -29,10 +42,10 @@ const AddComponent = () => {
       <div className="relative mb-4 flex w-full flex-wrap items-stretch">
         <div className="w-1/5 p-6 text-right font-bold">Pname</div>
         <input className="w-4/5 p-6 rounded-r border border-solid border-neutral-500 shadow-md"
-        name="pname"
-        type={'text'}
-        value={product.pname}
-        onChange={handleChangeProduct}
+          name="pname"
+          type={'text'}
+          value={product.pname}
+          onChange={handleChangeProduct}
         ></input>
       </div>
 
@@ -58,9 +71,11 @@ const AddComponent = () => {
       
       <div className="relative mb-4 flex w-full flex-wrap items-stretch">
         <div className="w-1/5 p-6 text-right font-bold">Files</div>
-        <input className="w-4/5 p-6 rounded-r border border-solid border-neutral-500 shadow-md"
+        <input ref={uploadRef}
+        className="w-4/5 p-6 rounded-r border border-solid border-neutral-500 shadow-md"
         name="files"
         type={'file'}
+        multiple={true}
         value={product.files}
         onChange={handleChangeProduct}
         ></input>
