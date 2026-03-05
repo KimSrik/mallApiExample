@@ -9,6 +9,10 @@ const productsRouter = () => {
     {
       path:"list",
       element:<Suspense fallback={Loading}><ProductsList></ProductsList></Suspense>
+    },
+    {
+      path:"",
+      element:<Navigate replace to = "/products/list"></Navigate>
     }
   ]
 }
