@@ -150,7 +150,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	public void remove(Long pno) {
-		productRepository.updateToDelete(pno, false);
+		productRepository.updateToDelete(pno, true);
 	}
 	
 	
