@@ -9,7 +9,7 @@ export const postAdd = async (product) => {
 
   const res = await axios.post(`${host}/`, product, header)
 
-  return res.data
+  return res.data;
 }
 
 export const getList = async (pageParam) => {
@@ -22,6 +22,21 @@ export const getList = async (pageParam) => {
 
 export const getOne = async (pno) => {
   const res = await axios.get(`${host}/${pno}`);
+
+  return res.data;
+}
+
+export const putOne = async (pno, product) => {
+
+  const header = { headers:{"Content-Type" : "multipart/form-data"} }
+
+  const res = await axios.put(`${host}/${pno}`, product, header);
+
+  return res.data;
+}
+
+export const deleteOne = async (pno) => {
+  const res = await axios.delete(`${host}/${pno}`);
 
   return res.data;
 }
