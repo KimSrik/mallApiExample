@@ -30,6 +30,10 @@ public class CustomSecurityConfig {
 		
 		http.csrf(config -> config.disable());
 		
+		http.formLogin(config -> {
+			config.loginPage("/api/member/login");
+		});
+		
 		return http.build();
 	}
 	
