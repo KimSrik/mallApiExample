@@ -28,6 +28,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class CustomSecurityConfig {
+
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -45,7 +46,7 @@ public class CustomSecurityConfig {
 		});
 		
 		http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class);		// JWT 체크
-		
+		http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()));
 		http.exceptionHandling(
 				config -> { config.accessDeniedHandler(new CustomAccessDeniedHandler());
 			});
