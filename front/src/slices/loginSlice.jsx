@@ -1,8 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { loginPost } from "../api/memberApi";
+import { setCookie, getCookie, removeCookie } from "../util/cookieUtil";
 
 const initState = {
   email : ''
+}
+
+const loadMemberCookie = () => {
+  const memberInfo = getCookie("member");
+
+  if(memberInfo && memberInfo.nickname ) {
+    memberInfo.nickname = decodeURIComponent(memberInfo.nickname);
+  }
+
+  return memberInfo;
 }
 
 export const loginPostAsync = createAsyncThunk('loginPostAsync', (param) => {
@@ -11,7 +22,7 @@ export const loginPostAsync = createAsyncThunk('loginPostAsync', (param) => {
 
 const loginSlice = createSlice({
   name : "LoginSlice",
-  initialState : initState,
+  initialState : loadMemberCookie() || initState,
 
   reducers: {
     login : (state, action) => {
@@ -23,6 +34,8 @@ const loginSlice = createSlice({
     logout : (state, action) => {
       console.log("logout.....");
 
+      removeCookie("member");
+
       return {...initState}
     }
   },
@@ -32,6 +45,11 @@ const loginSlice = createSlice({
       console.log("fulfilled");
 
       const payload = action.payload;
+
+      // 정상적인 로그인일때만 저장
+      if(!payload.error) {
+        setCookie("member", JSON.stringify(payload), 1);
+      }
 
       return payload;
     })
