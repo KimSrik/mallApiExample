@@ -31,7 +31,8 @@ const LoginComponent = () => {
         alert("이메일과 패스워드를 다시 확인 후 입력하세요.");
       }else{
         alert("로그인 성공");
-        navigate({pathname:`/`}, {replace:true})
+        // navigate({pathname:`/`}, {replace:true})
+        moveToPath(`/`);
       }
     })
 
