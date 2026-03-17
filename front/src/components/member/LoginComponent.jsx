@@ -32,7 +32,7 @@ const LoginComponent = () => {
       }else{
         alert("로그인 성공");
         // navigate({pathname:`/`}, {replace:true})
-        moveToPath(`/`);
+        moveToPath('/');
       }
     })
 
