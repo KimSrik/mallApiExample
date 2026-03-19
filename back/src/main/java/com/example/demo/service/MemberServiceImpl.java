@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		String email = getEmailFromKakaoAccessToken(accessToken);
 		
-		log.info("email", email);
+		log.info("email : " + email);
 		
 		return null;
 		
