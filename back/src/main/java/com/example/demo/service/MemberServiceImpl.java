@@ -16,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.example.demo.domain.Member;
 import com.example.demo.domain.MemberRole;
 import com.example.demo.dto.MemberDTO;
+import com.example.demo.dto.MemberModifyDTO;
 import com.example.demo.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -123,6 +124,20 @@ public class MemberServiceImpl implements MemberService {
 		member.addRole(MemberRole.USER);
 		
 		return member;
+	}
+	
+	public void modifyMember(MemberModifyDTO memberModifyDTO) {
+		
+		Optional<Member> result = memberRepository.findById(memberModifyDTO.getEmail());
+		
+		Member member = result.orElseThrow();
+		
+		member.changePw(passwordEncoder.encode(memberModifyDTO.getPw()));
+		member.changeSocial(false);
+		member.changeNickname(memberModifyDTO.getNickname());
+		
+		memberRepository.save(member);
+		
 	}
 	
 }

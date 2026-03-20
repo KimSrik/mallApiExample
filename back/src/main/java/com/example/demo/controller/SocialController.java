@@ -3,10 +3,13 @@ package com.example.demo.controller;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.MemberDTO;
+import com.example.demo.dto.MemberModifyDTO;
 import com.example.demo.service.MemberService;
 import com.example.demo.util.JWTUtil;
 
@@ -36,5 +39,14 @@ public class SocialController {
 		claims.put("refreshToken", jwtRefreshToken);
 		
 		return claims;
+	}
+	
+	@PutMapping("/api/member/modify")
+	public Map<String, String> modify(@RequestBody MemberModifyDTO memberModifyDTO) {
+		log.info("member modify : " + memberModifyDTO);
+		
+		memberService.modifyMember(memberModifyDTO);
+		
+		return Map.of("result", "modified");
 	}
 }

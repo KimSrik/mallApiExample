@@ -3,10 +3,14 @@ import { useEffect } from "react";
 import { getAccessToken, getMemberWithAccessToken } from "../../api/kakaoApi";
 import { useDispatch } from "react-redux";
 import { login } from "../../slices/loginSlice";
+import useCustomLogin from "../../hooks/useCustomLogin";
+
 
 const KakaoRedirectPage = () => {
   
   const [searchParams] = useSearchParams();
+
+  const {moveToPath} = useCustomLogin();
 
   const dispatch = useDispatch();
 
@@ -21,6 +25,14 @@ const KakaoRedirectPage = () => {
         console.log(memberInfo);
 
         dispatch(login(memberInfo));
+
+        if(memberInfo && !memberInfo.social) {
+          // 일반회원의 경우는 mainPage로
+          moveToPath("/");
+        }else{
+          moveToPath("/member/modify");
+        }
+
       })
     })
   }, [authCode])

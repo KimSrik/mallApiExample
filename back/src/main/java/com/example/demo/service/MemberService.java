@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.domain.Member;
 import com.example.demo.dto.MemberDTO;
+import com.example.demo.dto.MemberModifyDTO;
 
 @Transactional
 public interface MemberService {
@@ -25,5 +26,7 @@ public interface MemberService {
 		return dto;
 
 	}
+	
+	void modifyMember(MemberModifyDTO memberModifyDTO);
 	
 }
