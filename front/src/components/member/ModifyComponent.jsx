@@ -67,6 +67,8 @@ const ModifyComponent = () => {
           <input className="w-4/5 p-6 rounded-r border border-solid border-neutral-300 shadow-md"
           name="pw"
           type={'password'}
+          value={member.pw}
+          onChange={handleChange}
           >
           </input>
         </div>
